@@ -1,7 +1,7 @@
 services:
   api:
-    image: anthonyvillazana/votabien_backend:latest
-    container_name: politics_api
+    image: norulesgui/votabien_backend:latest
+    # container_name: politics_api
     restart: unless-stopped
     env_file:
       - .env.production
@@ -9,7 +9,7 @@ services:
       - "8000:8000"
     command: sh /app/entrypoint.sh
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://votabienperu.com/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8000.com/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3

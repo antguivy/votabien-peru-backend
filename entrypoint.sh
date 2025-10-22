@@ -19,10 +19,12 @@ echo "Entorno actual: $ENVIRONMENT"
 
 # Chequeo de seguridad
 if [ -z "$DATABASE_URI" ]; then
-  echo "¡ERROR FATAL! DATABASE_URI está vacía o no definida."
-  echo "El script se detendrá aquí."
+  echo "❌ ERROR: DATABASE_URI está vacía o no definida"
+  echo "Abortando despliegue..."
   exit 1
 fi
+
+echo "✅ DATABASE_URI detectada correctamente"
 
 if [ "$ENVIRONMENT" = "production" ]; then
   echo "Producción detectada: aplicando migraciones en Supabase..."
