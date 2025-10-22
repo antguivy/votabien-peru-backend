@@ -14,7 +14,12 @@ load_dotenv()
 config = context.config
 
 # Sobrescribir la URL de la base de datos desde .env
-config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URI"))
+database_uri = os.getenv("DATABASE_URI")
+if database_uri:
+    config.set_main_option("sqlalchemy.url", database_uri)
+else:
+    # Fallback o error más claro
+    raise ValueError("❌ DATABASE_URI no está configurada en las variables de entorno")
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
