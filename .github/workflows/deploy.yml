@@ -34,7 +34,7 @@ jobs:
 
       # 4️⃣ Desplegar en Dokploy automáticamente
       - name: Trigger Dokploy Deployment
-        if: success() && '${{ secrets.DOKPLOY_DEPLOY_HOOK }}' != ''
+        if: success() && secrets.DOKPLOY_DEPLOY_HOOK != ''
         run: |
           echo "🚀 Triggering Dokploy deploy..."
           curl -X POST "${{ secrets.DOKPLOY_DEPLOY_HOOK }}"
