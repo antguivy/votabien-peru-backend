@@ -1,0 +1,89 @@
+# ==============================
+# 🐍 PYTHON / FASTAPI / ALEMBIC
+# ==============================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# PyInstaller
+*.spec
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+.cache
+pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+htmlcov/
+
+# Alembic
+alembic/versions/__pycache__/
+alembic/versions/*.pyc
+# (Mantiene los scripts .py de migración, solo ignora caché)
+
+# Logs y temporal
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.sqlite3
+
+# ==================
+# 📦 POETRY
+# ==================
+poetry.lock
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# ==================
+# 🐳 DOCKER
+# ==================
+# Ignora archivos de volúmenes y compilación
+docker-compose.override.yml
+.env.local
+.env.development
+.env.production
+.env.test
+
+# ==================
+# 🧠 EDITORES
+# ==================
+# VSCode
+.vscode/
+# PyCharm
+.idea/
+# Otros IDE
+*.iml
+
+# ==================
+# 🪣 SISTEMA / MISC
+# ==================
+.DS_Store
+Thumbs.db
+*.orig
+*.rej
+*.out
+*.log
+*.pid
+
+# ==================
+# 🔐 SECRETS / CONFIG PRIVADA
+# ==================
+.env
+.env.*
+!.env.example
