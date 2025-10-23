@@ -12,7 +12,7 @@ API REST para consultar información política del Perú: candidatos, legislador
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/votabien-peru-backend.git
+git clone https://github.com/antguivy/votabien-peru-backend.git
 cd votabien-peru-backend
 ```
 
@@ -28,26 +28,11 @@ cp .env.example .env
 
 **Importante**: El archivo `.env` ya está configurado para funcionar con Docker. Solo necesitas cambiar el `JWT_SECRET_KEY` por seguridad.
 
-### 3. Generar un JWT_SECRET_KEY seguro
-
-```bash
-# En Linux/Mac
-openssl rand -hex 32
-
-# O con Python
-python -c "import secrets; print(secrets.token_urlsafe(48))"
-```
-
-Copia el resultado y reemplaza el valor de `JWT_SECRET_KEY` en tu archivo `.env`.
-
-### 4. Levantar los servicios
+### 3. Levantar los servicios
 
 ```bash
 # Construir e iniciar todos los contenedores
 docker-compose up --build
-
-# O en modo detached (segundo plano)
-docker-compose up -d --build
 ```
 
 Esto hará automáticamente:
@@ -77,91 +62,13 @@ El proyecto incluye datos de ejemplo basados en el contexto político peruano re
 
 - 5 partidos políticos (Fuerza Popular, Perú Libre, Acción Popular, APP, Renovación Popular)
 - 8 distritos electorales
-- 6 personas políticas conocidas
+- 10 personas políticas conocidas
 - 3 legisladores activos
-- 4 candidaturas (Elecciones 2021)
+- 8 candidaturas
 - 3 proyectos de ley
 - 8 registros de asistencia
 - 2 denuncias
 
-## 🛠️ Comandos Útiles
-
-### Ver logs de los servicios
-
-```bash
-# Ver logs de todos los servicios
-docker-compose logs -f
-
-# Ver solo logs de la API
-docker-compose logs -f api
-
-# Ver solo logs de la base de datos
-docker-compose logs -f db
-```
-
-### Detener los servicios
-
-```bash
-# Detener contenedores (mantiene los datos)
-docker-compose stop
-
-# Detener y eliminar contenedores (mantiene los datos en volúmenes)
-docker-compose down
-
-# Detener, eliminar contenedores Y volúmenes (elimina TODOS los datos)
-docker-compose down -v
-```
-
-### Reiniciar servicios
-
-```bash
-# Reiniciar todos
-docker-compose restart
-
-# Reiniciar solo la API
-docker-compose restart api
-```
-
-### Ejecutar comandos dentro de los contenedores
-
-```bash
-# Acceder a shell de la API
-docker-compose exec api bash
-
-# Ejecutar migraciones manualmente
-docker-compose exec api alembic upgrade head
-
-# Crear una nueva migración
-docker-compose exec api alembic revision --autogenerate -m "descripcion"
-
-# Acceder a PostgreSQL
-docker-compose exec db psql -U politics_user -d politics_db
-```
-
-### Ver base de datos desde terminal
-
-```bash
-# Conectarse a PostgreSQL
-docker-compose exec db psql -U politics_user -d politics_db
-
-# Dentro de psql, puedes ejecutar:
-\dt                          # Listar tablas
-\d persona                   # Ver estructura de tabla 'persona'
-SELECT * FROM persona;       # Consultar datos
-\q                          # Salir
-```
-
-## 🔄 Recargar datos de prueba
-
-Si quieres volver a cargar los datos de ejemplo desde cero:
-
-```bash
-# 1. Detener y eliminar contenedores y volúmenes
-docker-compose down -v
-
-# 2. Volver a levantar (recargará seed.sql automáticamente)
-docker-compose up -d --build
-```
 
 ## 🏗️ Estructura del Proyecto
 
@@ -272,68 +179,6 @@ docker-compose build --no-cache api
 docker-compose up -d
 ```
 
-## 📝 Variables de Entorno
-
-| Variable | Descripción | Requerido | Default |
-|----------|-------------|-----------|---------|
-| `DATABASE_URI` | Conexión a PostgreSQL | ✅ | - |
-| `JWT_SECRET_KEY` | Clave secreta para JWT | ✅ | - |
-| `APP_NAME` | Nombre de la aplicación | ❌ | "Backend" |
-| `ENVIRONMENT` | Entorno (development/staging/production) | ❌ | development |
-| `DEBUG` | Modo debug | ❌ | False |
-| `FRONTEND_HOST` | URL del frontend | ❌ | http://localhost:3000 |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | Duración token acceso | ❌ | 15 |
-| `REFRESH_TOKEN_EXPIRE_MINUTES` | Duración token refresh | ❌ | 10080 |
-| `RESEND_API_KEY` | API key de Resend | ❌ | - |
-| `EMAIL_FROM` | Email remitente | ❌ | auto-generado |
-
-## 🌐 Endpoints Principales
-
-Una vez levantado el proyecto, puedes probar estos endpoints:
-
-```bash
-# Health check
-curl http://localhost:8000/health
-
-# Listar partidos políticos
-curl http://localhost:8000/api/v1/partidos
-
-# Listar legisladores activos
-curl http://localhost:8000/api/v1/legisladores
-
-# Ver documentación completa
-# http://localhost:8000/docs
-```
-
-## 📦 Producción
-
-Para desplegar en producción:
-
-1. **Cambia las variables de entorno**:
-   - `ENVIRONMENT=production`
-   - `DEBUG=False`
-   - `JWT_SECRET_KEY` con un secret fuerte (64+ caracteres)
-   - `DATABASE_URI` con tu base de datos de producción
-
-2. **Usa un servicio de PostgreSQL gestionado**:
-   - AWS RDS
-   - Google Cloud SQL
-   - Supabase
-   - Railway
-   - Render
-
-3. **Despliega la API**:
-   - Railway (recomendado para empezar)
-   - Render
-   - AWS ECS/Fargate
-   - Google Cloud Run
-   - DigitalOcean App Platform
-
-4. **No uses `docker-compose` en producción directamente**. Usa orquestadores como:
-   - Kubernetes
-   - Docker Swarm
-   - O servicios gestionados (Railway, Render, etc.)
-
 ## 🤝 Contribuir
 
 1. Fork el proyecto
@@ -342,19 +187,7 @@ Para desplegar en producción:
 4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
 5. Abre un Pull Request
 
-## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT.
 
-## 👥 Autores
-
-- Tu Nombre - [@tu_usuario](https://github.com/tu_usuario)
-
-## 🙏 Agradecimientos
-
-- Datos basados en información pública del Jurado Nacional de Elecciones (JNE)
-- Congreso de la República del Perú
-
----
 
 **¿Problemas?** Abre un [issue](https://github.com/tu-usuario/votabien-peru-backend/issues)

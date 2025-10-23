@@ -24,9 +24,9 @@ async def lifespan(_app: FastAPI):
 
     # ====== Startup ======
     logger.info("=" * 60)
-    logger.info("🚀 Starting %s", settings.APP_NAME)
-    logger.info("📝 Environment: %s", settings.ENVIRONMENT)
-    logger.info("🐛 Debug mode: %s", settings.DEBUG)
+    logger.info("Starting %s", settings.APP_NAME)
+    logger.info("Environment: %s", settings.ENVIRONMENT)
+    logger.info("Debug mode: %s", settings.DEBUG)
     logger.info("=" * 60)
 
     try:
@@ -34,8 +34,8 @@ async def lifespan(_app: FastAPI):
         # await init_embeddings()
         # await init_vector_store()
         # logger.info("=" * 60)
-        # logger.info("✅ All systems initialized successfully!")
-        # logger.info(f"📚 Docs available at: http://localhost:8000/docs")
+        # logger.info("All systems initialized successfully!")
+        # logger.info(f"Docs available at: http://localhost:8000/docs")
         # logger.info("=" * 60)
     except (RuntimeError, ConnectionError, TimeoutError) as e:
         logger.error("Application startup failed due to runtime error: %s", e)
@@ -74,10 +74,9 @@ app.add_middleware(
 )
 
 
-# 🔒 Root endpoint seguro
 @app.get("/")
 async def root():
-    return {"message": "Marketing Intelligence Backend is running."}
+    return {"message": "VotaBienPeru Backend is running."}
 
 
 @app.get("/health")
@@ -94,15 +93,12 @@ async def health_check():
     }
 
 
-# 🔒 Exception handler global
 @app.exception_handler(Exception)
 async def global_exception_handler(_request, exc):
-    # Development
     if settings.DEBUG:
         return JSONResponse(
             status_code=500, content={"error": str(exc), "type": type(exc).__name__}
         )
-    # Porduction
     return JSONResponse(status_code=500, content={"error": "Internal Server Error"})
 
 

@@ -15,7 +15,7 @@ def utc_now():
     return datetime.now(timezone.utc)
 
 
-# ============= ENUMS (Sin cambios, están bien definidos) =============
+# ============= ENUMS =============
 class TipoCamara(str, Enum):
     CONGRESO = "Congreso"
     SENADO = "Senado"
@@ -73,7 +73,7 @@ class ExperienciaLaboral(BaseModel):
     descripcion: Optional[str] = None
 
 
-# --- CAMBIO CLAVE: Entidad central para la Persona ---
+# --- Entidad central Persona ---
 class Persona(SQLModel, table=True):
     """
     Entidad única que representa a un individuo en la política.
@@ -104,7 +104,7 @@ class Persona(SQLModel, table=True):
     experiencia_laboral: Optional[List[ExperienciaLaboral]] = Field(
         default=None, sa_column=Column(JSON)
     )
-    # Antecedentes (pertenecen a la persona, no al rol)
+    # Antecedentes
     antecedentes_penales: Optional[List[Antecedente]] = Field(
         default=None, sa_column=Column(JSON)
     )
@@ -142,7 +142,6 @@ class PartidoPolitico(SQLModel, table=True):
     color_hex: Optional[str] = Field(default=None, max_length=7)
     activo: bool = Field(default=True)
 
-    # Nuevos campos
     fundador: Optional[str] = Field(default=None, max_length=200)
     fecha_fundacion: Optional[date] = Field(default=None)
     descripcion: Optional[str] = Field(default=None, max_length=1000)
@@ -157,15 +156,12 @@ class PartidoPolitico(SQLModel, table=True):
     # Campos de financiamiento y gastos (en soles)
     financiamiento_anual: Optional[float] = Field(default=None)
     gasto_campana_ultima: Optional[float] = Field(default=None)
-    fuente_financiamiento: Optional[str] = Field(
-        default=None, max_length=500
-    )  # Descripción breve
+    fuente_financiamiento: Optional[str] = Field(default=None, max_length=500)
 
     # Timeline e historia (almacenado como JSON)
     historia_timeline: Optional[List[HistorialPartido]] = Field(
         default=None, sa_column=Column(JSON)
     )  # JSON string
-    # Ejemplo: [{"año": 2020, "evento": "Fundación del partido"}, ...]
 
     # Redes sociales
     facebook_url: Optional[str] = Field(default=None)
@@ -234,8 +230,6 @@ class Legislador(SQLModel, table=True):
     """
 
     id: str = Field(default_factory=cuid_factory, primary_key=True)
-
-    # --- MODIFICADO: Vínculo a la persona ---
     persona_id: str = Field(foreign_key="persona.id", index=True)
 
     # Información del cargo en este periodo específico
@@ -269,8 +263,6 @@ class Candidato(SQLModel, table=True):
     """
 
     id: str = Field(default_factory=cuid_factory, primary_key=True)
-
-    # --- MODIFICADO: Vínculos a Persona y Proceso Electoral ---
     persona_id: str = Field(foreign_key="persona.id", index=True)
     proceso_electoral_id: str = Field(foreign_key="procesoelectoral.id", index=True)
 
@@ -289,7 +281,7 @@ class Candidato(SQLModel, table=True):
     # Estado de la candidatura en este proceso
     estado: EstadoCandidatura = Field(default=EstadoCandidatura.INSCRITO)
 
-    # Resultados (se llenan después de la elección)
+    # Resultados
     votos_obtenidos: Optional[int] = Field(default=None)
     fue_elegido: bool = Field(default=False)
 
@@ -298,21 +290,20 @@ class Candidato(SQLModel, table=True):
         default_factory=utc_now,
     )
 
-    # --- MODIFICADO: Relaciones corregidas y completas ---
+    # Relaciones
     persona: "Persona" = Relationship(back_populates="candidaturas")
     partido: "PartidoPolitico" = Relationship(back_populates="candidatos")
     distrito: Optional["Distrito"] = Relationship(back_populates="candidatos")
     proceso_electoral: "ProcesoElectoral" = Relationship(back_populates="candidaturas")
 
 
-# ============= DESEMPEÑO LEGISLATIVO (Sin cambios mayores) =============
+# ============= DESEMPEÑO LEGISLATIVO =============
 
 
 class ProyectoLey(SQLModel, table=True):
     """Proyectos de ley presentados por un legislador en un periodo concreto"""
 
     id: str = Field(default_factory=cuid_factory, primary_key=True)
-    # --- MODIFICADO: El autor es un Legislador (un periodo), no una persona genérica ---
     legislador_id: str = Field(foreign_key="legislador.id", index=True)
     numero: str = Field(max_length=50, unique=True, index=True)
     titulo: str = Field(max_length=500)

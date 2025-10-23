@@ -1,5 +1,8 @@
 from typing import List, Optional
 
+from fastapi import APIRouter, Depends, HTTPException, Query, status
+from sqlmodel import Session
+
 from app.config.database import get_session
 from app.config.security import get_current_user, oauth2_scheme
 from app.models.politics import EstadoCandidatura, TipoCamara, TipoCandidatura
@@ -22,8 +25,6 @@ from app.schemas.politics import (
     UpdatePersonaRequest,
 )
 from app.services import politics
-from fastapi import APIRouter, Depends, HTTPException, Query, status
-from sqlmodel import Session
 
 # ====== RUTAS PÚBLICAS ======
 politics_public_router = APIRouter(
@@ -323,7 +324,7 @@ async def create_candidatura(
 )
 async def update_candidatura(
     candidatura_id: str,
-    data: CreateCandidaturaRequest,  # Puedes crear un UpdateCandidaturaRequest específico
+    data: CreateCandidaturaRequest,
     current_user=Depends(get_current_user),
     session: Session = Depends(get_session),
 ):

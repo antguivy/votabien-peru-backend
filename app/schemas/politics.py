@@ -1,5 +1,3 @@
-# app/schemas/politics.py
-
 from datetime import datetime
 from typing import Optional
 
@@ -42,7 +40,7 @@ class CreatePersonaRequest(BaseModel):
 
 
 class UpdatePersonaRequest(BaseModel):
-    """Request para actualizar una persona (todos los campos opcionales)"""
+    """Request para actualizar una persona"""
 
     nombres: Optional[str] = Field(None, max_length=150)
     apellidos: Optional[str] = Field(None, max_length=150)
@@ -64,7 +62,7 @@ class UpdatePersonaRequest(BaseModel):
 
 
 # ==============================================================================
-# == SCHEMAS PARA LEGISLADOR (PERIODO)
+# == LEGISLADOR (PERIODO)
 # ==============================================================================
 
 
@@ -82,7 +80,7 @@ class CreateLegisladorPeriodoRequest(BaseModel):
 
 
 # ==============================================================================
-# == SCHEMAS PARA CANDIDATURA
+# == CANDIDATURA
 # ==============================================================================
 
 
@@ -112,7 +110,7 @@ class CreateCandidaturaRequest(BaseModel):
         EstadoCandidatura.INSCRITO, description="Estado de la candidatura"
     )
 
-    # Resultados (usualmente se llenan después)
+    # Resultados
     votos_obtenidos: Optional[int] = None
     fue_elegido: bool = False
 
@@ -133,7 +131,7 @@ class UpdateCandidaturaRequest(BaseModel):
 
 
 # ==============================================================================
-# == SCHEMAS PARA PARTIDO POLÍTICO
+# == PARTIDO POLÍTICO
 # ==============================================================================
 
 
@@ -162,7 +160,7 @@ class UpdatePartidoRequest(BaseModel):
 
 
 # ==============================================================================
-# == SCHEMAS PARA DISTRITO
+# == DISTRITO
 # ==============================================================================
 
 
@@ -178,7 +176,7 @@ class CreateDistritoRequest(BaseModel):
 
 
 # ==============================================================================
-# == SCHEMAS PARA PROCESO ELECTORAL
+# == PROCESO ELECTORAL
 # ==============================================================================
 
 
@@ -200,7 +198,7 @@ class UpdateProcesoElectoralRequest(BaseModel):
 
 
 # ==============================================================================
-# == SCHEMAS PARA PROYECTO DE LEY
+# == PROYECTO DE LEY
 # ==============================================================================
 
 
@@ -217,7 +215,7 @@ class CreateProyectoLeyRequest(BaseModel):
 
 
 # ==============================================================================
-# == SCHEMAS PARA DENUNCIA
+# == DENUNCIA
 # ==============================================================================
 
 

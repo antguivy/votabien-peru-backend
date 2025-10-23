@@ -2,6 +2,10 @@
 
 from typing import List, Optional
 
+from fastapi import HTTPException, status
+from sqlalchemy.orm import aliased, joinedload, selectinload
+from sqlmodel import Session, or_, select
+
 from app.models.politics import (
     Candidato,
     Distrito,
@@ -22,9 +26,6 @@ from app.schemas.politics import (
     CreateProcesoElectoralRequest,
     UpdatePersonaRequest,
 )
-from fastapi import HTTPException, status
-from sqlalchemy.orm import aliased, joinedload, selectinload
-from sqlmodel import Session, or_, select
 
 # ==============================================================================
 # == SERVICIOS PARA PERSONA
@@ -47,7 +48,7 @@ async def get_personas_list(
     )
 
     if es_legislador_activo:
-        # IMPORTANTE: Usamos un alias para evitar conflictos
+        # alias para evitar conflictos
         legislador_alias = aliased(Legislador)
 
         query = query.join(
@@ -80,12 +81,10 @@ async def get_personas_list(
             )
         )
 
-    # DISTINCT es necesario porque una Persona puede tener múltiples periodos activos
     query = query.distinct(Persona.id).offset(skip).limit(limit)
 
     personas = session.exec(query).all()
 
-    # Procesar resultados
     return [
         {
             **persona.model_dump(),
@@ -129,7 +128,6 @@ async def get_persona_by_id(persona_id: str, session: Session):
 
 async def create_persona(data: CreatePersonaRequest, session: Session):
     """Crear una nueva Persona en la base de datos."""
-    # Verificar si ya existe el DNI
     existing = session.exec(select(Persona).where(Persona.dni == data.dni)).first()
 
     if existing:
@@ -138,7 +136,6 @@ async def create_persona(data: CreatePersonaRequest, session: Session):
             detail=f"Ya existe una persona con el DNI {data.dni}",
         )
 
-    # Construir nombre completo automáticamente
     nombre_completo = f"{data.nombres} {data.apellidos}".strip()
 
     persona = Persona.model_validate(data, update={"nombre_completo": nombre_completo})
@@ -161,7 +158,6 @@ async def update_persona(persona_id: str, data: UpdatePersonaRequest, session: S
     for key, value in update_data.items():
         setattr(persona, key, value)
 
-    # Actualizar nombre completo si se modificaron nombres o apellidos
     if "nombres" in update_data or "apellidos" in update_data:
         persona.nombre_completo = f"{persona.nombres} {persona.apellidos}".strip()
 
@@ -198,22 +194,18 @@ async def add_legislador_periodo(
     data: CreateLegisladorPeriodoRequest, session: Session
 ):
     """Añadir un nuevo rol/periodo legislativo a una Persona existente."""
-    # Verificar que la persona existe
     persona = session.get(Persona, data.persona_id)
     if not persona:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Persona no encontrada para asignar el rol",
         )
-
-    # Verificar que el partido existe
     if not session.get(PartidoPolitico, data.partido_id):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Partido político no encontrado",
         )
 
-    # Verificar que el distrito existe
     if not session.get(Distrito, data.distrito_id):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -249,7 +241,6 @@ async def get_candidaturas_list(
     Totalmente optimizado.
     """
 
-    # --- Filtros básicos ---
     filters = []
     if proceso_electoral_id:
         filters.append(Candidato.proceso_electoral_id == proceso_electoral_id)
@@ -258,7 +249,6 @@ async def get_candidaturas_list(
     if estado:
         filters.append(Candidato.estado == estado)
 
-    # --- Query base ---
     query = (
         select(Candidato)
         .where(*filters)
@@ -279,7 +269,6 @@ async def get_candidaturas_list(
         .limit(limit)
     )
 
-    # --- Filtros complejos ---
     if partidos:
         query = query.join(Candidato.partido).where(
             PartidoPolitico.nombre.in_(partidos)
@@ -296,17 +285,13 @@ async def get_candidaturas_list(
             )
         )
 
-    # --- Ejecutar ---
     candidatos = session.exec(query).unique().all()
 
-    # --- Serializar de forma limpia ---
     resultado = []
     for c in candidatos:
         persona = c.persona
 
-        candidatura_dict = c.model_dump()  # columnas simples
-
-        # Aplanamos relaciones
+        candidatura_dict = c.model_dump()
         candidatura_dict.update(
             {
                 "persona": persona.model_dump() if persona else None,
@@ -356,28 +341,24 @@ async def get_candidatura_by_id(candidatura_id: str, session: Session):
 
 async def add_candidatura(data: CreateCandidaturaRequest, session: Session):
     """Añadir una nueva candidatura a una Persona."""
-    # Verificar que la persona existe
     if not session.get(Persona, data.persona_id):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Persona no encontrada para la candidatura",
         )
 
-    # Verificar que el proceso electoral existe
     if not session.get(ProcesoElectoral, data.proceso_electoral_id):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Proceso electoral no encontrado",
         )
 
-    # Verificar que el partido existe
     if not session.get(PartidoPolitico, data.partido_id):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Partido político no encontrado",
         )
 
-    # Verificar distrito si aplica (no para Presidente/Vicepresidente)
     if data.distrito_id and not session.get(Distrito, data.distrito_id):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -389,7 +370,6 @@ async def add_candidatura(data: CreateCandidaturaRequest, session: Session):
     session.commit()
     session.refresh(candidatura)
 
-    # Recargar con relaciones
     return await get_candidatura_by_id(candidatura.id, session)
 
 
@@ -443,7 +423,6 @@ async def create_proceso_electoral(
     data: CreateProcesoElectoralRequest, session: Session
 ):
     """Crear un nuevo proceso electoral."""
-    # Verificar si ya existe un proceso para ese año
     existing = session.exec(
         select(ProcesoElectoral).where(ProcesoElectoral.año == data.año)
     ).first()
@@ -489,7 +468,6 @@ async def get_partido_by_id(partido_id: str, session: Session):
 
 async def create_partido(data: CreatePartidoRequest, session: Session):
     """Crear un nuevo partido político."""
-    # Verificar si ya existe el nombre
     existing_nombre = session.exec(
         select(PartidoPolitico).where(PartidoPolitico.nombre == data.nombre)
     ).first()
@@ -500,7 +478,6 @@ async def create_partido(data: CreatePartidoRequest, session: Session):
             detail=f"Ya existe un partido con el nombre '{data.nombre}'",
         )
 
-    # Verificar si ya existe la sigla
     existing_sigla = session.exec(
         select(PartidoPolitico).where(PartidoPolitico.sigla == data.sigla)
     ).first()

@@ -1,7 +1,7 @@
-# app/responses/politics.py
-
 from datetime import date, datetime
 from typing import List, Optional
+
+from pydantic import BaseModel
 
 from app.models.politics import (
     Antecedente,
@@ -10,10 +10,9 @@ from app.models.politics import (
     TipoCamara,
     TipoCandidatura,
 )
-from pydantic import BaseModel
 
 # ==============================================================================
-# == RESPONSES PARA PERSONA
+# == PERSONA
 # ==============================================================================
 
 
@@ -92,7 +91,7 @@ class PersonaDetailResponse(PersonaBaseResponse):
 
 
 # ==============================================================================
-# == RESPONSES PARA CANDIDATURAS
+# == CANDIDATURAS
 # ==============================================================================
 
 
@@ -141,7 +140,7 @@ class CandidaturaDetailResponse(CandidaturaBaseResponse):
 
 
 # ==============================================================================
-# == RESPONSES PARA PARTIDOS
+# == PARTIDOS
 # ==============================================================================
 
 
@@ -199,7 +198,7 @@ class PartidoPoliticoDetailResponse(BaseModel):
 
 
 # ==============================================================================
-# == RESPONSES PARA DISTRITOS
+# == DISTRITOS
 # ==============================================================================
 
 
@@ -219,7 +218,7 @@ class DistritoElectoralResponse(BaseModel):
 
 
 # ==============================================================================
-# == RESPONSES PARA PROCESOS ELECTORALES
+# == PROCESOS ELECTORALES
 # ==============================================================================
 
 
@@ -238,7 +237,7 @@ class ProcesoElectoralResponse(BaseModel):
 
 
 # ==============================================================================
-# == RESPONSES PARA PROYECTOS DE LEY
+# == PROYECTOS DE LEY
 # ==============================================================================
 
 
@@ -259,7 +258,7 @@ class ProyectoLeyResponse(BaseModel):
 
 
 # ==============================================================================
-# == RESPONSES PARA ASISTENCIAS
+# == ASISTENCIAS
 # ==============================================================================
 
 
@@ -277,7 +276,7 @@ class AsistenciaResponse(BaseModel):
 
 
 # ==============================================================================
-# == RESPONSES PARA DENUNCIAS
+# == DENUNCIAS
 # ==============================================================================
 
 
@@ -299,7 +298,7 @@ class DenunciaResponse(BaseModel):
 
 
 # ==============================================================================
-# == RESPONSES PARA ESTADÍSTICAS
+# == ESTADÍSTICAS
 # ==============================================================================
 
 

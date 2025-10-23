@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     FRONTEND_HOST: str = "http://localhost:3000"
     ALLOWED_ORIGINS: List[str] = ["http://localhost:3000"]
 
-    # === Database(prod + dev) ===
+    # === Database ===
     DATABASE_URI: str = Field(default="", description="Database connection string")
 
     # === security ===

@@ -28,15 +28,6 @@ def setup_logging(debug: bool = False, environment: str = "development"):
         )
 
     handler.setFormatter(formatter)
-
-    # Reemplazar handlers previos en el logger raíz (Root)
     logger.handlers = [handler]
-    # # Desactiva la propagación para evitar logs duplicados
-    # sql_logger = logging.getLogger('sqlalchemy.engine.Engine')
-    # sql_logger.propagate = False
-    # # Asigna el handler personalizado
-    # sql_logger.handlers = [handler]
-    # # Establece nivel de log para SQLAlchemy
-    # sql_logger.setLevel(logging.INFO)
 
     return logger

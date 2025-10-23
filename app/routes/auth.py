@@ -15,7 +15,7 @@ from sqlmodel import Session
 from app.config.database import get_session
 from app.config.security import get_current_user, get_token_user, oauth2_scheme
 from app.responses.auth import LoginResponse, UserResponse
-from app.schemas.auth import RegisterUserRequest, VerifyUserRequest
+from app.schemas.auth import VerifyUserRequest
 from app.services import auth
 from app.utils.cookies import _clear_token_cookies, _set_token_cookies
 
@@ -32,15 +32,15 @@ users_router = APIRouter(
 
 
 # ====== AUTH (público) ======
-@auth_router.post(
-    "/register", status_code=status.HTTP_201_CREATED, response_model=UserResponse
-)
-async def register_user(
-    data: RegisterUserRequest,
-    background_tasks: BackgroundTasks,
-    session: Session = Depends(get_session),
-):
-    return await auth.create_user_account(data, session, background_tasks)
+# @auth_router.post(
+#     "/register", status_code=status.HTTP_201_CREATED, response_model=UserResponse
+# )
+# async def register_user(
+#     data: RegisterUserRequest,
+#     background_tasks: BackgroundTasks,
+#     session: Session = Depends(get_session),
+# ):
+#     return await auth.create_user_account(data, session, background_tasks)
 
 
 @auth_router.post(

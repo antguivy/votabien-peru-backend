@@ -72,7 +72,6 @@ async def send_account_activation_confirmation_email(
     background_tasks.add_task(_send)
 
 
-# Templates HTML como strings (sin .format() problemático)
 def get_verification_email_template(app_name: str, name: str, activate_url: str) -> str:
     return f"""
     <!DOCTYPE html>

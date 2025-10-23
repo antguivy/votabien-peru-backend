@@ -93,7 +93,6 @@ def get_token_payload(
         return payload
 
     except jwt.ExpiredSignatureError:
-        # Solo llega aquí si allow_expired=False
         return None
 
     except jwt.InvalidTokenError as e:
@@ -108,9 +107,8 @@ def generate_token(
     now = datetime.now(timezone.utc)
     expire = now + expiry
 
-    # Crea un nuevo diccionario para evitar modificar el original (sin efectos secundarios)
     token_payload = {
-        **payload,  # Copia el contenido del payload original
+        **payload,  # Copia
         "iat": int(now.timestamp()),
         "exp": int(expire.timestamp()),
     }

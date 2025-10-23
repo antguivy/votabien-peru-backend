@@ -17,7 +17,6 @@ from app.config.settings import get_settings
 logger = logging.getLogger(__name__)
 settings = get_settings()
 
-# Base to SQLAlchemy models
 Base = declarative_base()
 
 
@@ -59,7 +58,6 @@ class DatabaseManager:
             pool_size=20,
             max_overflow=0,
             echo=False,
-            # echo=settings.DEBUG,
         )
 
         self._session_factory = sessionmaker(
@@ -69,7 +67,6 @@ class DatabaseManager:
             class_=Session,
         )
 
-        # Verificar conexión
         self._verify_connection()
         logger.info("✓ Database connection established successfully.")
 

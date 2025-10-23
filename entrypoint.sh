@@ -1,30 +1,7 @@
 #!/bin/sh
 set -e
 
-echo "---------------------------------------"
-echo "INICIANDO SCRIPT DE DEPURACIÓN..."
-echo "---------------------------------------"
-
-echo "Verificando variables clave:"
-echo "ENVIRONMENT: [$ENVIRONMENT]"
-echo "DATABASE_URI (primeros 20 chars): [${DATABASE_URI:0:20}]..."
-
-echo "---------------------------------------"
-echo "LISTA COMPLETA DE ENTORNO (printenv):"
-printenv
-echo "---------------------------------------"
-
-
 echo "Entorno actual: $ENVIRONMENT"
-
-# Chequeo de seguridad
-if [ -z "$DATABASE_URI" ]; then
-  echo "❌ ERROR: DATABASE_URI está vacía o no definida"
-  echo "Abortando despliegue..."
-  exit 1
-fi
-
-echo "✅ DATABASE_URI detectada correctamente"
 
 if [ "$ENVIRONMENT" = "production" ]; then
   echo "Producción detectada: aplicando migraciones en Supabase..."
@@ -32,15 +9,29 @@ if [ "$ENVIRONMENT" = "production" ]; then
 else
   echo 'Esperando a que PostgreSQL esté listo...'
   sleep 5
-  
-  # ... (tu lógica 'else' para desarrollo) ...
-  # Esta sección fallará de todos modos porque variables como
-  # POSTGRES_PASSWORD no están definidas en tu .env
-  
+
   echo 'Aplicando migraciones de Alembic...'
   alembic upgrade head
-  
-  # ... (resto de tu script 'else') ...
+
+  echo 'Verificando si necesitamos poblar la base de datos...'
+  COUNT=$(PGPASSWORD=$POSTGRES_PASSWORD psql -h db -U $POSTGRES_USER -d $POSTGRES_DB -tAc \
+  "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE'")
+
+  if [ "$COUNT" -gt 0 ]; then
+      echo "Las tablas ya existen, verificando si hay datos..."
+      HAS_DATA=$(PGPASSWORD=$POSTGRES_PASSWORD psql -h db -U $POSTGRES_USER -d $POSTGRES_DB -tAc \
+      "SELECT COUNT(*) FROM persona")
+
+      if [ "$HAS_DATA" -gt 0 ]; then
+          echo "Base de datos ya tiene datos, omitiendo seed..."
+      else
+          echo "Poblando la base de datos..."
+          PGPASSWORD=$POSTGRES_PASSWORD psql -h db -U $POSTGRES_USER -d $POSTGRES_DB -f /app/seed.sql
+      fi
+  else
+      echo "Poblando la base de datos..."
+      PGPASSWORD=$POSTGRES_PASSWORD psql -h db -U $POSTGRES_USER -d $POSTGRES_DB -f /app/seed.sql
+  fi
 fi
 
 echo 'Iniciando servidor FastAPI...'
