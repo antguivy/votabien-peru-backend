@@ -41,25 +41,25 @@ INSERT INTO partidopolitico (
     'Fondos partidarios, aportes privados y recaudación en eventos' ,
     jsonb_build_array(
         jsonb_build_object(
-        "año": 2010, "evento": "Fundación de Fuerza 2011, origen del partido",
+        'año', 2010, 'evento', 'Fundación de Fuerza 2011, origen del partido'
 
         ),
         jsonb_build_object(
-        "año": 2011, "evento": "Segunda vuelta presidencial con Keiko Fujimori",
+        'año', 2011, 'evento', 'Segunda vuelta presidencial con Keiko Fujimori'
 
         ),
         jsonb_build_object(
-        "año": 2016, "evento": "Mayoría absoluta en el Congreso",
+        'año', 2016, 'evento', 'Mayoría absoluta en el Congreso'
 
         ),
         jsonb_build_object(
-        "año": 2021, "evento": "Tercera participación en segunda vuelta presidencial",
+        'año', 2021, 'evento', 'Tercera participación en segunda vuelta presidencial'
 
         ),
         jsonb_build_object(
-        "año": 2022, "evento": "Reestructuración interna del partido"
+        'año', 2022, 'evento', 'Reestructuración interna del partido'
 
-        ),
+        )
 
     )
     ,
@@ -91,22 +91,22 @@ INSERT INTO partidopolitico (
     'Aportes de militantes, actividades políticas y fondos de campaña',
     jsonb_build_array(
         jsonb_build_object(
-        "año": 2016, "evento": "Fundación del partido político en Junín por Vladimir Cerrón",
+        'año', 2016, 'evento', 'Fundación del partido político en Junín por Vladimir Cerrón'
         ),
         jsonb_build_object(
-        "año": 2018, "evento": "Participación en elecciones regionales",
+        'año', 2018, 'evento', 'Participación en elecciones regionales'
         ),
         jsonb_build_object(
-        "año": 2020, "evento": "Inscripción nacional ante el JNE",
+        'año', 2020, 'evento', 'Inscripción nacional ante el JNE'
         ),
         jsonb_build_object(
-        "año": 2021, "evento": "Victoria presidencial de Pedro Castillo",
+        'año', 2021, 'evento', 'Victoria presidencial de Pedro Castillo'
         ),
         jsonb_build_object(
-        "año": 2022, "evento": "Crisis política y vacancia presidencial",
+        'año', 2022, 'evento', 'Crisis política y vacancia presidencial'
         ),
         jsonb_build_object(
-        "año": 2024, "evento": "Reestructuración interna y renovación de cuadros"
+        'año', 2024, 'evento', 'Reestructuración interna y renovación de cuadros'
         )
     )
     ,
@@ -138,19 +138,19 @@ INSERT INTO partidopolitico (
     'Aportes voluntarios y financiamiento estatal directo',
     jsonb_build_array(
         jsonb_build_object(
-        "año": 1956, "evento": "Fundación por Fernando Belaúnde Terry",
+        'año', 1956, 'evento', 'Fundación por Fernando Belaúnde Terry'
         ),
         jsonb_build_object(
-        "año": 1963, "evento": "Primera elección de Belaúnde como presidente",
+        'año', 1963, 'evento', 'Primera elección de Belaúnde como presidente'
         ),
         jsonb_build_object(
-        "año": 1980, "evento": "Segundo gobierno de Belaúnde",
+        'año', 1980, 'evento', 'Segundo gobierno de Belaúnde'
         ),
         jsonb_build_object(
-        "año": 2001, "evento": "Reinscripción del partido",
+        'año', 2001, 'evento', 'Reinscripción del partido'
         ),
         jsonb_build_object(
-        "año": 2021, "evento": "Participación en elecciones generales"
+        'año', 2021, 'evento', 'Participación en elecciones generales'
         )
     )
     ,
@@ -182,19 +182,19 @@ INSERT INTO partidopolitico (
     'Fondos propios y aportes privados de militantes',
     jsonb_build_array(
         jsonb_build_object(
-        "año": 2001, "evento": "Fundación del partido por César Acuña",
+        'año', 2001, 'evento', 'Fundación del partido por César Acuña'
         ),
         jsonb_build_object(
-        "año": 2014, "evento": "Participación en elecciones regionales",
+        'año', 2014, 'evento', 'Participación en elecciones regionales'
         ),
         jsonb_build_object(
-        "año": 2016, "evento": "Primera candidatura presidencial",
+        'año', 2016, 'evento', 'Primera candidatura presidencial'
         ),
         jsonb_build_object(
-        "año": 2021, "evento": "Participación en elecciones generales",
+        'año', 2021, 'evento', 'Participación en elecciones generales'
         ),
         jsonb_build_object(
-        "año": 2024, "evento": "Consolidación regional en el norte del país"
+        'año', 2024, 'evento', 'Consolidación regional en el norte del país'
         )
     )
     ,
@@ -226,17 +226,17 @@ INSERT INTO partidopolitico (
     'Aportes empresariales y contribuciones de simpatizantes',
     jsonb_build_array(
         jsonb_build_object(
-        "año": 2019, "evento": "Fundación del partido por Rafael López Aliaga",
+        'año', 2019, 'evento', 'Fundación del partido por Rafael López Aliaga'
         ),
         jsonb_build_object(
-        "año": 2020, "evento": "Inscripción en el Registro de Organizaciones Políticas",
+        'año', 2020, 'evento', 'Inscripción en el Registro de Organizaciones Políticas'
         ),
         jsonb_build_object(
-        "año": 2021, "evento": "Participación en elecciones generales",
+        'año', 2021, 'evento', 'Participación en elecciones generales'
         ),
         jsonb_build_object(
-        "año": 2023, "evento": "Rafael López Aliaga asume la Alcaldía de Lima"
-        ),
+        'año', 2023, 'evento', 'Rafael López Aliaga asume la Alcaldía de Lima'
+        )
 
     )
     ,
@@ -307,15 +307,14 @@ INSERT INTO persona (
     'https://example.com/hv/keiko-fujimori.pdf',
     jsonb_build_array(
         jsonb_build_object(
-        "cargo": "Congresista de la República", "empresa": "Congreso del Perú", "periodo": "2006 - 2011", "descripcion": "Representó a Lima; promovió proyectos de educación y familia.",
+        'cargo', 'Congresista de la República', 'empresa', 'Congreso del Perú', 'periodo', '2006 - 2011', 'descripcion', 'Representó a Lima; promovió proyectos de educación y familia.'
         ),
         jsonb_build_object(
-        "cargo": "Presidenta del partido", "empresa": "Fuerza Popular", "periodo": "2010 - Actualidad", "descripcion": "Lidera el principal partido de oposición."
-        ),
-    )
-    ,
-    jsonb_build_array(),
-    jsonb_build_array(),
+        'cargo', 'Presidenta del partido', 'empresa', 'Fuerza Popular', 'periodo', '2010 - Actualidad', 'descripcion', 'Lidera el principal partido de oposición.'
+        )
+    ),
+    '[]'::jsonb,
+    '[]'::jsonb,
     'https://facebook.com/keikofujimori',
     'https://twitter.com/keikofujimori',
     'https://instagram.com/keikofujimori',
@@ -340,22 +339,22 @@ INSERT INTO persona (
     'https://example.com/hv/pedro-castillo.pdf',
     jsonb_build_array(
         jsonb_build_object(
-        "cargo": "Profesor", "empresa": "Institución Educativa N°10465 Puña, Cajamarca", "periodo": "1995 - 2021", "descripcion": "Docente de primaria en zona rural.",
+        'cargo', 'Profesor', 'empresa', 'Institución Educativa N°10465 Puña, Cajamarca', 'periodo', '1995 - 2021', 'descripcion', 'Docente de primaria en zona rural.'
         ),
         jsonb_build_object(
-        "cargo": "Dirigente sindical", "empresa": "Sindicato Unitario de Trabajadores de la Educación del Perú (SUTEP)", "periodo": "2017 - 2021", "descripcion": "Líder de la huelga magisterial de 2017.",
+        'cargo', 'Dirigente sindical', 'empresa', 'Sindicato Unitario de Trabajadores de la Educación del Perú (SUTEP)', 'periodo', '2017 - 2021', 'descripcion', 'Líder de la huelga magisterial de 2017.'
         ),
         jsonb_build_object(
-        "cargo": "Presidente del Perú", "empresa": "Gobierno del Perú", "periodo": "2021 - 2022", "descripcion": "Mandato interrumpido tras crisis política."
-        ),
+        'cargo', 'Presidente del Perú', 'empresa', 'Gobierno del Perú', 'periodo', '2021 - 2022', 'descripcion', 'Mandato interrumpido tras crisis política.'
+        )
     )
     ,
-    jsonb_build_array(),
+    '[]'::jsonb,
     jsonb_build_array(
-    jsonb_build_object(
-        "tipo": "Judicial", "descripcion": "Investigación por presunto delito de rebelión", "estado": "En proceso", "año": 2023
-    ))
-    ,
+        jsonb_build_object(
+        'tipo', 'Judicial', 'descripcion', 'Investigación por presunto delito de rebelión', 'estado', 'En proceso', 'año', 2013
+        )
+    ),
     'https://facebook.com/pedrocastillo',
     'https://twitter.com/pedrocastillo',
     'https://instagram.com/pedrocastillo',
@@ -380,15 +379,14 @@ INSERT INTO persona (
     'https://example.com/hv/maria-alva.pdf',
     jsonb_build_array(
         jsonb_build_object(
-        "cargo": "Gerente de Proyectos", "empresa": "Ministerio de Trabajo y Promoción del Empleo", "periodo": "2002 - 2006", "descripcion": "Gestión de programas de inserción laboral juvenil.",
+        'cargo', 'Gerente de Proyectos', 'empresa', 'Ministerio de Trabajo y Promoción del Empleo', 'periodo', '2002 - 2006', 'descripcion', 'Gestión de programas de inserción laboral juvenil.'
         ),
         jsonb_build_object(
-        "cargo": "Congresista de la República", "empresa": "Congreso del Perú", "periodo": "2021 - Actualidad", "descripcion": "Integrante de la Comisión de Constitución."
+        'cargo', 'Congresista de la República', 'empresa', 'Congreso del Perú', 'periodo', '2021 - Actualidad', 'descripcion', 'Integrante de la Comisión de Constitución.'
         )
-    )
-    ,
-    jsonb_build_array(),
-    jsonb_build_array(),
+    ) ,
+    '[]'::jsonb,
+    '[]'::jsonb,
     'https://facebook.com/mariaalva',
     'https://twitter.com/carmenaIvap',
     'https://instagram.com/mariaalva',
@@ -413,23 +411,21 @@ INSERT INTO persona (
     'https://example.com/hv/cesar-acuna.pdf',
     jsonb_build_array(
         jsonb_build_object(
-        "cargo": "Fundador y Rector", "empresa": "Universidad César Vallejo", "periodo": "1991 - Actualidad", "descripcion": "Fundador y presidente del grupo educativo.",
+        'cargo', 'Fundador y Rector', 'empresa', 'Universidad César Vallejo', 'periodo', '1991 - Actualidad', 'descripcion', 'Fundador y presidente del grupo educativo.'
         ),
         jsonb_build_object(
-        "cargo": "Alcalde Provincial de Trujillo", "empresa": "Municipalidad Provincial de Trujillo", "periodo": "2007 - 2014", "descripcion": "Promovió proyectos de infraestructura educativa."
+        'cargo', 'Alcalde Provincial de Trujillo', 'empresa', 'Municipalidad Provincial de Trujillo', 'periodo', '2007 - 2014', 'descripcion', 'Promovió proyectos de infraestructura educativa.'
         ),
         jsonb_build_object(
-        "cargo": "Gobernador Regional de La Libertad", "empresa": "Gobierno Regional de La Libertad", "periodo": "2015 - 2016", "descripcion": "Inició obras de modernización regional."
-        ),
-    )
-    ,
-    jsonb_build_array(),
+        'cargo', 'Gobernador Regional de La Libertad', 'empresa', 'Gobierno Regional de La Libertad', 'periodo', '2015 - 2016', 'descripcion', 'Inició obras de modernización regional.'
+        )
+    ),
+    '[]'::jsonb,
     jsonb_build_array(
         jsonb_build_object(
-        "tipo": "Judicial", "descripcion": "Investigación por presunta compra de votos en el Congreso", "estado": "Archivado", "año": 2017
+        'tipo', 'Judicial', 'descripcion', 'Investigación por presunta compra de votos en el Congreso', 'estado', 'Archivado', 'año', 2017
         )
-    )
-    ,
+    ),
     'https://facebook.com/cesaracuna',
     'https://twitter.com/cesaracunapy',
     'https://instagram.com/cesaracuna',
@@ -454,20 +450,19 @@ INSERT INTO persona (
     'https://example.com/hv/rafael-lopez.pdf',
     jsonb_build_array(
         jsonb_build_object(
-        "cargo": "Empresario", "empresa": "Grupo ACRES", "periodo": "1990 - Actualidad", "descripcion": "Fundador de empresas en sectores financiero y hotelero."
+        'cargo', 'Empresario', 'empresa', 'Grupo ACRES', 'periodo', '1990 - Actualidad', 'descripcion', 'Fundador de empresas en sectores financiero y hotelero.'
         ),
         jsonb_build_object(
-        "cargo": "Alcalde de Lima", "empresa": "Municipalidad Metropolitana de Lima", "periodo": "2023 - Actualidad", "descripcion": "Gestión urbana enfocada en transporte y seguridad ciudadana."
+        'cargo', 'Alcalde de Lima', 'empresa', 'Municipalidad Metropolitana de Lima', 'periodo', '2023 - Actualidad', 'descripcion', 'Gestión urbana enfocada en transporte y seguridad ciudadana.'
         )
     )
     ,
-    jsonb_build_array(),
+    '[]'::jsonb,
     jsonb_build_array(
         jsonb_build_object(
-        "tipo": "Judicial", "descripcion": "Investigación por presunto delito tributario", "estado": "Archivado", "año": 2004
+        'tipo', 'Judicial', 'descripcion', 'Investigación por presunto delito tributario', 'estado', 'Archivado', 'año', 2014
         )
-    )
-    ,
+    ),
     'https://facebook.com/rafaellopezaliaga',
     'https://twitter.com/rlopezaliaga1',
     'https://instagram.com/rafaellopezaliaga',
@@ -492,23 +487,22 @@ INSERT INTO persona (
     'https://example.com/hv/guido-bellido.pdf',
     jsonb_build_array(
         jsonb_build_object(
-        "cargo": "Ingeniero de Obras", "empresa": "Gobierno Regional de Cusco", "periodo": "2005 - 2013", "descripcion": "Coordinación técnica de proyectos de infraestructura vial."
+        'cargo', 'Ingeniero de Obras', 'empresa', 'Gobierno Regional de Cusco', 'periodo', '2005 - 2013', 'descripcion', 'Coordinación técnica de proyectos de infraestructura vial.'
         ),
         jsonb_build_object(
-        "cargo": "Congresista de la República", "empresa": "Congreso del Perú", "periodo": "2021 - Actualidad", "descripcion": "Miembro de la Comisión de Energía y Minas."
+        'cargo', 'Congresista de la República', 'empresa', 'Congreso del Perú', 'periodo', '2021 - Actualidad', 'descripcion', 'Miembro de la Comisión de Energía y Minas.'
         ),
         jsonb_build_object(
-        "cargo": "Presidente del Consejo de Ministros", "empresa": "Gobierno del Perú", "periodo": "2021", "descripcion": "Encabezó el gabinete ministerial durante los primeros meses de gobierno de Pedro Castillo."
+        'cargo', 'Presidente del Consejo de Ministros', 'empresa', 'Gobierno del Perú', 'periodo', '2021', 'descripcion', 'Encabezó el gabinete ministerial durante los primeros meses de gobierno de Pedro Castillo.'
         )
     )
     ,
-    jsonb_build_array(),
+    '[]'::jsonb,
     jsonb_build_array(
         jsonb_build_object(
-        "tipo": "Judicial", "descripcion": "Investigación por presunta apología al terrorismo", "estado": "En investigación", "año": 2021
+        'tipo', 'Judicial', 'descripcion', 'Investigación por presunta apología al terrorismo', 'estado', 'En investigación', 'año', 2011
         )
-    )
-    ,
+    ),
     'https://facebook.com/guidobellido',
     'https://twitter.com/GuidoBellido',
     'https://instagram.com/guidobellido',
@@ -532,15 +526,14 @@ INSERT INTO persona (
     'https://example.com/hv/ana-herrera.pdf',
     jsonb_build_array(
         jsonb_build_object(
-        "cargo": "Asesora Legal", "empresa": "Ministerio de Justicia", "periodo": "2005 - 2015", "descripcion": "Elaboración de dictámenes y proyectos de ley."
+        'cargo', 'Asesora Legal', 'empresa', 'Ministerio de Justicia', 'periodo', '2005 - 2015', 'descripcion', 'Elaboración de dictámenes y proyectos de ley.'
         ),
         jsonb_build_object(
-        "cargo": "Senadora", "empresa": "Congreso del Perú", "periodo": "2021 - Actualidad", "descripcion": "Miembro de la Comisión de Justicia y Derechos Humanos."
+        'cargo', 'Senadora', 'empresa', 'Congreso del Perú', 'periodo', '2021 - Actualidad', 'descripcion', 'Miembro de la Comisión de Justicia y Derechos Humanos.'
         )
-    )
-    ,
-    jsonb_build_array(),
-    jsonb_build_array(),
+    ),
+    '[]'::jsonb,
+    '[]'::jsonb,
     'https://facebook.com/anaherrerav',
     'https://twitter.com/anaherrerav',
     'https://instagram.com/anaherrerav',
@@ -565,23 +558,21 @@ INSERT INTO persona (
     'https://example.com/hv/diego-ramos.pdf',
     jsonb_build_array(
         jsonb_build_object(
-        "cargo": "Analista Económico", "empresa": "Banco Central de Reserva del Perú", "periodo": "2006 - 2016", "descripcion": "Evaluación de impacto macroeconómico de políticas fiscales."
+        'cargo', 'Analista Económico', 'empresa', 'Banco Central de Reserva del Perú', 'periodo', '2006 - 2016', 'descripcion', 'Evaluación de impacto macroeconómico de políticas fiscales.'
         ),
         jsonb_build_object(
-        "cargo": "Senador", "empresa": "Congreso del Perú", "periodo": "2021 - Actualidad", "descripcion": "Presidente de la Comisión de Economía."
+        'cargo', 'Senador', 'empresa', 'Congreso del Perú', 'periodo', '2021 - Actualidad', 'descripcion', 'Presidente de la Comisión de Economía.'
         )
-    )
-    ,
-    jsonb_build_array(),
+    ),
+    '[]'::jsonb,
     jsonb_build_array(
         jsonb_build_object(
-        "tipo": "Judicial",
-        "descripcion": "Investigación por presunto conflicto de interés relacionada con adjudicaciones públicas; procedimiento archivado",
-        "estado": "Archivado",
-        "año": 2014
+        'tipo', 'Judicial',
+        'descripcion', 'Investigación por presunto conflicto de interés relacionada con adjudicaciones públicas; procedimiento archivado',
+        'estado', 'Archivado',
+        'año', 2014
         )
-    )
-    ,
+    ),
     'https://facebook.com/diegoramos',
     'https://twitter.com/diegoramos',
     'https://instagram.com/diegoramos',
@@ -606,22 +597,21 @@ INSERT INTO persona (
     'https://example.com/hv/carmen-vasquez.pdf',
     jsonb_build_array(
         jsonb_build_object(
-        "cargo": "Docente", "empresa": "Ministerio de Educación", "periodo": "2008 - 2021", "descripcion": "Educadora en instituciones rurales de Piura."
+        'cargo', 'Docente', 'empresa', 'Ministerio de Educación', 'periodo', '2008 - 2021', 'descripcion', 'Educadora en instituciones rurales de Piura'
         ),
         jsonb_build_object(
-        "cargo": "Diputada", "empresa": "Congreso del Perú", "periodo": "2021 - Actualidad", "descripcion": "Miembro de la Comisión de Educación y Cultura."
+        'cargo', 'Diputada', 'empresa', 'Congreso del Perú', 'periodo', '2021 - Actualidad', 'descripcion', 'Miembro de la Comisión de Educación y Cultura'
         )
-    )
-    ,
+    ),
     jsonb_build_array(
     jsonb_build_object(
-        "tipo": "Penal/Administrativo",
-        "descripcion": "Multa administrativa por incumplimiento de norma técnica en obra pública (sanción administrativa)",
-        "estado": "Archivado",
-        "año": 2012
-    ))
-    ,
-    jsonb_build_array(),
+        'tipo', 'Penal/Administrativo',
+        'descripcion', 'Multa administrativa por incumplimiento de norma técnica en obra pública (sanción administrativa)',
+        'estado', 'Archivado',
+        'año', 2012
+        )
+    ),
+    '[]'::jsonb,
     'https://facebook.com/carmenvasquez',
     'https://twitter.com/carmenvasquez',
     'https://instagram.com/carmenvasquez',
@@ -646,15 +636,14 @@ INSERT INTO persona (
     'https://example.com/hv/luis-gamarra.pdf',
     jsonb_build_array(
         jsonb_build_object(
-        "cargo": "Gerente de Proyectos", "empresa": "Ministerio de Transportes y Comunicaciones", "periodo": "2000 - 2014", "descripcion": "Supervisión de proyectos viales en el sur del país.",
+        'cargo', 'Gerente de Proyectos', 'empresa', 'Ministerio de Transportes y Comunicaciones', 'periodo', '2000 - 2014', 'descripcion', 'Supervisión de proyectos viales en el sur del país.'
         ),
         jsonb_build_object(
-        "cargo": "Diputado", "empresa": "Congreso del Perú", "periodo": "2021 - Actualidad", "descripcion": "Vicepresidente de la Comisión de Infraestructura."
+        'cargo', 'Diputado', 'empresa', 'Congreso del Perú', 'periodo', '2021 - Actualidad', 'descripcion', 'Vicepresidente de la Comisión de Infraestructura'
         )
-    )
-    ,
-    jsonb_build_array(),
-    jsonb_build_array(),
+    ),
+    '[]'::jsonb,
+    '[]'::jsonb,
     'https://facebook.com/luisgamarra',
     'https://twitter.com/luisgamarra',
     'https://instagram.com/luisgamarra',
